@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/06/12 16:17:11 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/10 10:37:32 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ int		main(int argc, char **argv)
 		return (die("error: not enough arguments"));
 	if ((mlx = init(ft_strjoin("Fract'ol - ", get_name(argv[1])))) == NULL)
 		return (die("error: mlx couldn't init"));
-	mlx->viewport.xmin = -2.0f;
-	mlx->viewport.xmax = 1.0f;
-	mlx->viewport.ymin = -1.0f;
-	mlx->viewport.ymax = 1.0f;
-	mlx->viewport.max = 128;
+	mandelbrot_viewport(&mlx->viewport);
+	viewport_fit(&mlx->viewport);
+	mlx->viewport.max = 64;
+	mlx->viewport.zoom = 1.0f;
 	render(mlx);
 	mlx_key_hook(mlx->window, hook_keydown, mlx);
 	mlx_expose_hook(mlx->window, hook_expose, mlx);

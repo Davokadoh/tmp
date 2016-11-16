@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/06/12 17:44:09 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/14 23:34:39 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_H
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+# define ZOOM 1.1f
 
 typedef struct		s_rgba
 {
@@ -49,6 +50,9 @@ typedef struct		s_viewport
 	double		xmax;
 	double		ymin;
 	double		ymax;
+	double		zoom;
+	double		offx;
+	double		offy;
 	int			max;
 }					t_viewport;
 typedef struct		s_mlx
@@ -67,6 +71,12 @@ typedef struct		s_complex
 	double		zi;
 	int			i;
 }					t_complex;
+typedef struct		s_fractal
+{
+	char		*name;
+	void		(*viewport)(t_viewport *);
+	int			(*pixel)(int, int, t_viewport);
+}					t_fractal;
 
 t_mlx				*mlxdel(t_mlx *mlx);
 t_mlx				*init(char *title);
@@ -81,9 +91,12 @@ t_image				*new_image(t_mlx *mlx);
 void				clear_image(t_image *img);
 void				image_set_pixel(t_image *image, int x, int y, int color);
 char				*get_name(char *fract);
-int					fract_mandelbrot(int x, int y, t_viewport v);
-int					fract_julia(int x, int y, int max);
-t_color				get_color(double iter);
+int					mandelbrot_fractal(int x, int y, t_viewport v);
+void				mandelbrot_viewport(t_viewport *v);
+t_color				get_color(double iter, int max);
 int					smooth_color(t_complex p, int max);
 void				zoom(int x, int y, t_viewport *v, double z);
+int					is_grid(int x, int y, t_viewport v);
+void				viewport_fit(t_viewport *v);
+t_complex			screen_to_complex(int x, int y, t_viewport *v);
 #endif

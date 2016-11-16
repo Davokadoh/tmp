@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 14:43:24 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/06/12 16:46:46 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/14 23:57:23 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "math.h"
 #include <stdio.h>
 
-t_color		clerp(t_color c1, t_color c2, double p)
+t_color		clerp(t_color c1, t_color c2, float p)
 {
 	if (c1.value == c2.value)
 		return (c1);
@@ -26,10 +26,14 @@ t_color		clerp(t_color c1, t_color c2, double p)
 	return (c1);
 }
 
-t_color		get_color(double iter)
+t_color		get_color(double iter, int max)
 {
 	t_color c;
 
+	//c.rgba.r = (char)(iter / max * 255);
+	//c.rgba.g = (char)(iter / max * 127);
+	//c.rgba.b = 0;
+	(void)max;
 	c.rgba.r = (char)(cos(iter / 42.0f * 2.0f * M_PI) * 126 + 127);
 	c.rgba.g = (char)(cos((iter / 42.0f + 0.33f) * 2.0f * M_PI) * 126 + 127);
 	c.rgba.b = (char)(cos((iter / 42.0f + 0.66f) * 2.0f * M_PI) * 126 + 127);
@@ -48,5 +52,5 @@ int			smooth_color(t_complex p, int max)
 	zn = log(p.zr * p.zr + p.zi * p.zi) / 2;
 	nu = log(zn / log(2)) / log(2);
 	i = p.i + 1 - nu;
-	return (get_color(i).value);
+	return (get_color(i, max).value);
 }

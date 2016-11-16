@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:44:47 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/06/12 17:45:18 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/14 23:41:04 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 	/* ************************************************************************** */
 
@@ -26,7 +26,13 @@ void		render(t_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			image_set_pixel(mlx->image, x, y, fract_mandelbrot(x, y, mlx->viewport));
+			//if (is_grid(x, y, mlx->viewport))
+			//	image_set_pixel(mlx->image, x, y, 0x000000);
+			//else
+			int c = mandelbrot_fractal(x, y, mlx->viewport);
+			if (c == 0xFFFFFF)
+				c = 0x0;
+			image_set_pixel(mlx->image, x, y, c);
 			x++;
 		}
 		y++;

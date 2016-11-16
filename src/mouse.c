@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:37:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/06/12 17:50:24 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/14 23:35:06 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int		hook_mousedown(int button, int x, int y, t_mlx *mlx)
 	if (button == 4)
 	{
 		//wheel down
-		zoom(x, y, &mlx->viewport, 0.2);
+		zoom(x, y, &mlx->viewport, 1 / ZOOM);
 	}
 	else if (button == 5)
 	{
-		zoom(x, y, &mlx->viewport, -0.2);
+		zoom(x, y, &mlx->viewport, ZOOM);
 	}
 	(void)x;
 	if (y < 0)
@@ -48,20 +48,18 @@ int		hook_mousemove(int x, int y, t_mlx *mlx)
 	mlx->mouse.y = y;
 	if (mlx->mouse.isdown & (1 << 1) && mlx->mouse.isdown & (1 << 2))
 	{
-		//both buttons
+		// both buttons
 	}
 	else if (mlx->mouse.isdown & (1 << 1))
 	{
-		double w = mlx->viewport.xmax - mlx->viewport.xmin;
-		double h = mlx->viewport.ymax - mlx->viewport.ymin;
+		double w = (mlx->viewport.xmax - mlx->viewport.xmin) * mlx->viewport.zoom;
+		double h = (mlx->viewport.ymax - mlx->viewport.ymin) * mlx->viewport.zoom;
 
-		double wd = (mlx->mouse.lastx - mlx->mouse.x) * (w / WIN_WIDTH);
-		double hd = (mlx->mouse.lasty - mlx->mouse.y) * (h / WIN_HEIGHT);
+		double wd = (double)(mlx->mouse.lastx - mlx->mouse.x) / WIN_WIDTH * w;
+		double hd = (double)(mlx->mouse.lasty - mlx->mouse.y) / WIN_HEIGHT * h;
 	
-		mlx->viewport.xmin += wd;
-		mlx->viewport.xmax += wd;
-		mlx->viewport.ymin += hd;
-		mlx->viewport.ymax += hd;
+		mlx->viewport.offx += wd;
+		mlx->viewport.offy += hd;
 	}
 	else if (mlx->mouse.isdown & (1 << 2))
 	{

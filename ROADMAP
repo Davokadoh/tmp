@@ -1,0 +1,53 @@
+=== Fract'ol
+
+LIB
+
+ [X] Thread pool
+
+CORE
+
+ [ ] Queued, chunk-based calculations
+ [ ] Chunks are prioritized based on local variability
+ [ ] Progress bar shows total progress
+ [ ] Chunks moved out of the viewport are discarded
+ [ ] Chunks moved inside the viewport are added to the queue
+ [ ] Chunks are calculated progressively with increasing granularity
+
+GRID
+
+can only contain ((width / tilesize) + 1) * ((height / tilesize) + 1) tiles
+ - preallocate tiles and use / ditch them as needed
+   - how?
+     - THREADPOOL BABY
+ - partitioning scheme
+   - 64px always
+     - get scale of 1px
+     - separate into chunks that size
+
+ -> maybe just check what is "renderable" which i can tell since ive got the
+ previous and new viewport then clear the tiles that are left unused, and
+ generate the ones that have entered the screen
+
+ -> i could keep them all in a list and populate a "local" array
+ before performing my generation/render that way i can keep all of my tiles
+ neatly in memory, and i just have to recreate the hashtable
+
+foreach (tile in list)
+{
+	if (! tile is renderable)
+	{
+		clear tile;
+		get new tile;
+	}
+	put tile in local array;
+}
+
+REQ
+
+ [X] Mandelbrot
+ [ ] Julia
+ [ ] Burning ship
+
+EXTRA
+
+ [ ] Output to image (XPM?)

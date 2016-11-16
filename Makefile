@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/06/12 17:43:53 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/11/14 23:55:37 by pbondoer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRC		= main.c \
 		  fractal.c \
 		  draw.c \
 		  color.c \
-		  mandelbrot.c
+		  mandelbrot.c \
+		  grid.c \
+		  viewport.c
 
 OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 
@@ -38,9 +40,9 @@ MLX_LNK	= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
 # ft library
 FT		= ./libft/
-FT_LIB	= $(addprefix $(FT),libft.a)
-FT_INC	= -I ./libft
-FT_LNK	= -L ./libft -l ft
+FT_LIB	= $(addprefix $(FT),libft.a) ./libthreadpool/libthreadpool.a
+FT_INC	= -I ./libft -I ./libthreadpool
+FT_LNK	= -L ./libft -l ft -L ./libthreadpool -l threadpool
 
 # directories
 SRCDIR	= ./src/
@@ -56,10 +58,10 @@ $(OBJDIR)%.o:$(SRCDIR)%.c
 	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
-	make -C $(FT)
+	@make -C $(FT)
 
 $(MLX_LIB):
-	make -C $(MLX)
+	@make -C $(MLX)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLX_LNK) $(FT_LNK) -lm -o $(NAME)
