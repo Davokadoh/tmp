@@ -6,11 +6,12 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/11/14 23:55:37 by pbondoer         ###   ########.fr        #
+#    Updated: 2016/11/17 01:44:52 by lemon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fractol
+OS		= $(shell uname)
 
 # src / obj files
 SRC		= main.c \
@@ -32,11 +33,18 @@ OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
 
+
 # mlx library
-MLX		= ./miniLibX/
+ifeq ($(OS), Linux)
+	MLX		= ./miniLibX_X11/
+	MLX_LNK	= -L $(MLX) -l mlx -lXext -lX11
+else
+	MLX		= ./miniLibX/
+	MLX_LNK	= -L $(MLX) -l mlx -framework OpenGL -framework AppKit
+endif
+
+MLX_INC	= -I $(MLX)
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
-MLX_INC	= -I ./miniLibX
-MLX_LNK	= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
 
 # ft library
 FT		= ./libft/

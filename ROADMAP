@@ -12,6 +12,7 @@ CORE
  [ ] Chunks moved out of the viewport are discarded
  [ ] Chunks moved inside the viewport are added to the queue
  [ ] Chunks are calculated progressively with increasing granularity
+ [ ] Event queue for linux compatibility
 
 GRID
 

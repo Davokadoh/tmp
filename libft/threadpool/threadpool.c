@@ -1,27 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   threadpool.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lemon <pierre@bondoer.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 23:19:39 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/04/30 12:39:08 by lemon            ###   ########.fr       */
+/*   Created: 2016/10/09 00:56:45 by lemon             #+#    #+#             */
+/*   Updated: 2016/10/09 00:59:00 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
-{
-	size_t			i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return (((void *)&((unsigned char *)s)[i]));
-		i++;
-	}
-	return (NULL);
-}
