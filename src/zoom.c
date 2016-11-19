@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 17:39:58 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/14 20:27:06 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/17 05:54:27 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@
 
 void		zoom(int x, int y, t_viewport *v, double z)
 {
-	(void)x; (void)y; (void)v; (void)z;
+	double w;
+	double h;
+	double nw;
+	double nh;
 
-	double w = (v->xmax - v->xmin) * (v->zoom);
-	double h = (v->ymax - v->ymin) * (v->zoom);
-	double nw = ((v->xmax - v->xmin) * (v->zoom * z));
-	double nh = ((v->ymax - v->ymin) * (v->zoom * z));
-	
-	double dx = ((double)x / WIN_WIDTH) * (nw - w);
-	double dy = ((double)y / WIN_HEIGHT) * (nh - h);
-
+	w = (v->xmax - v->xmin) * (v->zoom);
+	h = (v->ymax - v->ymin) * (v->zoom);
+	nw = (v->xmax - v->xmin) * (v->zoom * z);
+	nh = (v->ymax - v->ymin) * (v->zoom * z);
 	v->zoom *= z;
-	v->offx -= dx;
-	v->offy -= dy;
-
-	printf("new zoom: %f\n", v->zoom);
+	v->offx -= ((double)x / WIN_WIDTH) * (nw - w);
+	v->offy -= ((double)y / WIN_HEIGHT) * (nh - h);
+	pintf("new zoom: %f\n", v->zoom);
 }

@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/14 23:34:39 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/17 05:34:31 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_mlx
 	t_image		*image;
 	t_mouse		mouse;
 	t_viewport	viewport;
+	int			render;
 }					t_mlx;
 typedef struct		s_complex
 {

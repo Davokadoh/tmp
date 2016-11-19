@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 14:43:24 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/14 23:57:23 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/17 05:39:07 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_color		get_color(double iter, int max)
 {
 	t_color c;
 
+	//TODO: proper hsv
 	//c.rgba.r = (char)(iter / max * 255);
 	//c.rgba.g = (char)(iter / max * 127);
 	//c.rgba.b = 0;

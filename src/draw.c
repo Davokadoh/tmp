@@ -6,13 +6,18 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:44:47 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/17 02:34:10 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/17 05:58:37 by lemon            ###   ########.fr       */
 /*                                                                            */
 	/* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx.h"
 #include <stdio.h>
+
+void		request_render(t_mlx *mlx)
+{
+	mlx->render = 1;
+}
 
 void		render(t_mlx *mlx)
 {
