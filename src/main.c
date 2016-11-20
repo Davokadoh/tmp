@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/17 05:35:14 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/19 18:11:46 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		main(int argc, char **argv)
 	mlx_hook(mlx->window, 4, 1L << 2, hook_mousedown, mlx);
 	mlx_hook(mlx->window, 5, 1L << 3, hook_mouseup, mlx);
 	mlx_hook(mlx->window, 6, 1L << 6, hook_mousemove, mlx);
+	//mlx_hook(mlx->window, 33, 0, hook_clientmessage, mlx);
 	mlx_loop_hook(mlx->mlx, hook_loop, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);

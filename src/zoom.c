@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 17:39:58 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/17 05:54:27 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/19 15:08:47 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void		zoom(int x, int y, t_viewport *v, double z)
 	v->zoom *= z;
 	v->offx -= ((double)x / WIN_WIDTH) * (nw - w);
 	v->offy -= ((double)y / WIN_HEIGHT) * (nh - h);
-	pintf("new zoom: %f\n", v->zoom);
 }

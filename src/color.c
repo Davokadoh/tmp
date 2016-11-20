@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 14:43:24 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/17 05:39:07 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/20 00:36:26 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ int			smooth_color(t_complex p, int max)
 	double i;
 	double zn;
 	double nu;
+	static double log2;
 
 	if (p.i >= max)
 		return (0x000000);
+	log2 = log(2);
 	zn = log(p.zr * p.zr + p.zi * p.zi) / 2;
-	nu = log(zn / log(2)) / log(2);
+	nu = log(zn / log2) / log2;
 	i = p.i + 1 - nu;
 	return (get_color(i, max).value);
 }

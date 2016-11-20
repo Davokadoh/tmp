@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 10:18:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/10 15:41:25 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/20 00:54:37 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_complex	screen_to_complex(int x, int y, t_viewport *v)
 	z = v->zoom;
 	p.cr = (((double)x / WIN_WIDTH) * (v->xmax - v->xmin)) * z + v->xmin + v->offx;
 	p.ci = (((double)y / WIN_HEIGHT) * (v->ymax - v->ymin)) * z + v->ymin + v->offy;
-	p.zr = 0;
-	p.zi = 0;
+	p.zr = p.cr;
+	p.zi = p.ci;
 	p.i = 0;
 	return (p);
 }

@@ -11,19 +11,24 @@ CORE
  [ ] Progress bar shows total progress
  [ ] Chunks moved out of the viewport are discarded
  [ ] Chunks moved inside the viewport are added to the queue
- [ ] Chunks are calculated progressively with increasing granularity
  [ ] Event queue for linux compatibility
+ [ ] When changing iterations, don't recalculate everything - do a delta
+ [ ] Chunks are calculated progressively with increasing granularity
+
+TODO
+
+ [ ] Have proper HSV (cos, more like "soc"ks!!)
+ [ ] Precalculate color table
+ [ ] Add a linear/logarithmic color switch
 
 GRID
 
 can only contain ((width / tilesize) + 1) * ((height / tilesize) + 1) tiles
- - preallocate tiles and use / ditch them as needed
-   - how?
-     - THREADPOOL BABY
  - partitioning scheme
    - 64px always
      - get scale of 1px
      - separate into chunks that size
+     - when we zoom, it seems to change every time... :(?
 
  -> maybe just check what is "renderable" which i can tell since ive got the
  previous and new viewport then clear the tiles that are left unused, and
@@ -52,3 +57,4 @@ REQ
 EXTRA
 
  [ ] Output to image (XPM?)
+ [ ] Orbit trap coloring
