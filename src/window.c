@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 05:33:42 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:07:35 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/21 14:48:36 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,5 @@ t_mlx		*init(t_fractal *f)
 		return (mlxdel(mlx));
 	mlx->mouse.isdown = 0;
 	mlx->fractal = f;
-	mlx->viewport.max = 64;
-	mlx->viewport.zoom = 1.0f;
 	return (mlx);
 }

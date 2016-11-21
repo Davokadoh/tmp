@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:08:03 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/21 14:48:13 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int		main(int argc, char **argv)
 		return (die("error: invalid fractal name"));
 	if ((mlx = init(f)) == NULL)
 		return (die("error: mlx couldn't initialize properly"));
-	mlx->fractal->viewport(&mlx->viewport);
-	viewport_fit(&mlx->viewport);
+	reset_viewport(mlx);
 	render(mlx);
 	mlx_key_hook(mlx->window, hook_keydown, mlx);
 	mlx_expose_hook(mlx->window, hook_expose, mlx);

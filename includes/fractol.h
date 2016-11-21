@@ -6,15 +6,15 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:31:29 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/21 15:25:48 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
+# include <stdint.h>
 # define FRACTOL_H
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define GRIDSIZE 64
 # define ZOOM 1.1f
 
 typedef struct		s_hsv
@@ -25,10 +25,10 @@ typedef struct		s_hsv
 }					t_hsv;
 typedef struct		s_rgba
 {
-	char		b;
-	char		g;
-	char		r;
-	char		a;
+	uint8_t		b;
+	uint8_t		g;
+	uint8_t		r;
+	uint8_t		a;
 }					t_rgba;
 typedef union		u_color
 {
@@ -109,5 +109,6 @@ int					get_color(t_pixel p, t_mlx *mlx);
 void				zoom(int x, int y, t_viewport *v, double z);
 int					is_grid(int x, int y, t_viewport v);
 void				viewport_fit(t_viewport *v);
+void				reset_viewport(t_mlx *mlx);
 t_complex			screen_to_complex(int x, int y, t_viewport *v);
 #endif

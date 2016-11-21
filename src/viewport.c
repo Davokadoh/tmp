@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 10:18:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:27:59 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/21 14:50:40 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ void		viewport_fit(t_viewport *v)
 		v->xmax = (h * WIN_WIDTH / WIN_HEIGHT / 2);
 	}
 }
-
+void		reset_viewport(t_mlx *mlx)
+{
+	mlx->viewport.offx = 0;
+	mlx->viewport.offy = 0;
+	mlx->fractal->viewport(&mlx->viewport);
+	viewport_fit(&mlx->viewport);
+	mlx->viewport.max = 64;
+	mlx->viewport.zoom = 1.0f;
+} 
 t_complex	screen_to_complex(int x, int y, t_viewport *v)
 {
 	t_complex	p;
