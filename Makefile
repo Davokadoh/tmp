@@ -6,7 +6,7 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/11/17 01:44:52 by lemon            ###   ########.fr        #
+#    Updated: 2016/11/21 14:30:41 by lemon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,14 @@ SRC		= main.c \
 		  fractal.c \
 		  draw.c \
 		  color.c \
-		  mandelbrot.c \
-		  grid.c \
-		  viewport.c
+		  viewport.c \
+		  fractals/mandelbrot.c \
 
-OBJ		= $(addprefix $(OBJDIR),$(SRC:.c=.o))
+OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror -g -pg
 
 
 # mlx library
@@ -50,19 +49,20 @@ MLX_LIB	= $(addprefix $(MLX),mlx.a)
 FT		= ./libft/
 FT_LIB	= $(addprefix $(FT),libft.a) ./libthreadpool/libthreadpool.a
 FT_INC	= -I ./libft -I ./libthreadpool
-FT_LNK	= -L ./libft -l ft -L ./libthreadpool -l threadpool
+FT_LNK	= -L ./libft -l ft -L ./libthreadpool -l threadpool -g -pg
 
 # directories
-SRCDIR	= ./src/
-INCDIR	= ./includes/
-OBJDIR	= ./obj/
+SRCDIR	= ./src
+INCDIR	= ./includes
+OBJDIR	= ./obj
 
 all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 
 obj:
 	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/fractals
 
-$(OBJDIR)%.o:$(SRCDIR)%.c
+$(OBJDIR)/%.o:$(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(MLX_INC) $(FT_INC) -I $(INCDIR) -o $@ -c $<
 
 $(FT_LIB):
