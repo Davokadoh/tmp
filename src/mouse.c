@@ -6,12 +6,11 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:37:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/23 03:00:09 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/23 03:15:00 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 int		hook_mousedown(int button, int x, int y, t_mlx *mlx)
 {

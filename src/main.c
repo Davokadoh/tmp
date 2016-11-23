@@ -6,14 +6,13 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/23 02:44:16 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/23 03:14:56 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fractol.h"
 #include "mlx.h"
-#include <stdio.h>
 
 int		hook_expose(t_mlx *mlx)
 {
