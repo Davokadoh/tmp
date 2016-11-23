@@ -6,12 +6,17 @@
 #    By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/22 23:12:10 by pbondoer          #+#    #+#              #
-#    Updated: 2016/11/21 14:30:41 by lemon            ###   ########.fr        #
+#    Updated: 2016/11/23 00:54:14 by lemon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fractol
 OS		= $(shell uname)
+
+# directories
+SRCDIR	= ./src
+INCDIR	= ./includes
+OBJDIR	= ./obj
 
 # src / obj files
 SRC		= main.c \
@@ -21,16 +26,17 @@ SRC		= main.c \
 		  keyboard.c \
 		  zoom.c \
 		  fractal.c \
+		  palette.c \
 		  draw.c \
 		  color.c \
 		  viewport.c \
-		  fractals/mandelbrot.c \
+		  $(addprefix fractals/,$(shell ls $(SRCDIR)/fractals | grep -E ".+\.c"))
 
 OBJ		= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 
 # compiler
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -pg
+CFLAGS	= -Wall -Wextra -Werror -g
 
 
 # mlx library
@@ -47,14 +53,9 @@ MLX_LIB	= $(addprefix $(MLX),mlx.a)
 
 # ft library
 FT		= ./libft/
-FT_LIB	= $(addprefix $(FT),libft.a) ./libthreadpool/libthreadpool.a
-FT_INC	= -I ./libft -I ./libthreadpool
-FT_LNK	= -L ./libft -l ft -L ./libthreadpool -l threadpool -g -pg
-
-# directories
-SRCDIR	= ./src
-INCDIR	= ./includes
-OBJDIR	= ./obj
+FT_LIB	= $(addprefix $(FT),libft.a)
+FT_INC	= -I ./libft
+FT_LNK	= -L ./libft -l ft -l pthread
 
 all: obj $(FT_LIB) $(MLX_LIB) $(NAME)
 

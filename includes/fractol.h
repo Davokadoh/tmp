@@ -6,23 +6,19 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 15:25:48 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 00:55:10 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # include <stdint.h>
+# include <pthread.h>
 # define FRACTOL_H
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define ZOOM 1.1f
+# define THREADS 8
 
-typedef struct		s_hsv
-{
-	int			h;
-	int			s;
-	int			v;
-}					t_hsv;
 typedef struct		s_rgba
 {
 	uint8_t		b;
@@ -60,7 +56,7 @@ typedef struct		s_viewport
 	double		zoom;
 	double		offx;
 	double		offy;
-	int			max;
+	long		max;
 }					t_viewport;
 typedef struct		s_complex
 {
@@ -70,29 +66,51 @@ typedef struct		s_complex
 typedef struct		s_pixel
 {
 	t_complex	c;
-	int			i;
+	long		i;
 }					t_pixel;
+typedef struct		s_palette
+{
+	uint8_t		count;
+	int			cycle;
+	int			colors[16];
+}					t_palette;
+typedef struct		s_mlx		t_mlx;
 typedef struct		s_fractal
 {
 	char		*name;
 	void		(*viewport)(t_viewport *);
-	t_pixel		(*pixel)(int, int, t_viewport *);
+	t_pixel		(*pixel)(int, int, t_viewport *, t_mlx *);
+	int			mouse;
 }					t_fractal;
+typedef struct		s_thread
+{
+	int				id;
+	t_mlx			*mlx;
+}					t_thread;
+typedef struct		s_render
+{
+	pthread_t		threads[THREADS];
+	t_thread		args[THREADS];
+}					t_render;
 typedef struct		s_mlx
 {
 	void		*mlx;
 	void		*window;
 	t_fractal	*fractal;
-	t_pixel		**data; // raw fractal data as 2d array
-	t_image		*image; // this is what we're displaying on screen
+	t_pixel		*data;
+	t_image		*image;
 	t_mouse		mouse;
 	t_viewport	viewport;
+	t_palette	*palette;
+	t_render	render;
 	int			smooth;
+	int			mouselock;
 }					t_mlx;
 
 t_mlx				*mlxdel(t_mlx *mlx);
 t_mlx				*init(t_fractal *f);
 void				render(t_mlx *mlx);
+void				draw(t_mlx *mlx);
 int					hook_mousedown(int button, int x, int y, t_mlx *mlx);
 int					hook_mouseup(int button, int x, int y, t_mlx *mlx);
 int					hook_mousemove(int x, int y, t_mlx *mlx);
@@ -103,12 +121,18 @@ t_image				*new_image(t_mlx *mlx);
 void				clear_image(t_image *img);
 void				image_set_pixel(t_image *image, int x, int y, int color);
 t_fractal			*fractal_match(char *str);
-t_pixel				mandelbrot_pixel(int x, int y, t_viewport *v);
-void				mandelbrot_viewport(t_viewport *v);
 int					get_color(t_pixel p, t_mlx *mlx);
+t_palette			*get_palettes();
 void				zoom(int x, int y, t_viewport *v, double z);
-int					is_grid(int x, int y, t_viewport v);
 void				viewport_fit(t_viewport *v);
 void				reset_viewport(t_mlx *mlx);
 t_complex			screen_to_complex(int x, int y, t_viewport *v);
+t_pixel				mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				mandelbrot_viewport(t_viewport *v);
+t_pixel				burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				burningship_viewport(t_viewport *v);
+t_pixel				julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
+void				julia_viewport(t_viewport *v);
+void				broadcast(pthread_mutex_t *lock, pthread_cond_t *cond);
+void				wait(pthread_mutex_t *lock, pthread_cond_t *cond);
 #endif

@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 05:33:42 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:48:36 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 00:55:29 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ t_mlx		*init(t_fractal *f)
 	if ((mlx->mlx = mlx_init()) == NULL ||
 		(mlx->window = mlx_new_window(mlx->mlx, WIN_WIDTH,
 			WIN_HEIGHT, title)) == NULL ||
-		(mlx->image = new_image(mlx)) == NULL)
+		(mlx->image = new_image(mlx)) == NULL || (mlx->data =
+			ft_memalloc(sizeof(t_pixel) * WIN_WIDTH * WIN_HEIGHT)) == NULL)
 		return (mlxdel(mlx));
 	mlx->mouse.isdown = 0;
 	mlx->fractal = f;
+	mlx->palette = get_palettes() + 1;
 	return (mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 14:43:24 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 15:26:31 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/22 00:41:07 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,23 @@ t_color		clerp(t_color c1, t_color c2, double p)
 	c.rgba.a = (char)0x00;
 	return (c);
 }
-t_color		linear_color(double iter, int max)
+t_color		linear_color(double i, int max, t_palette *p)
 {
-	t_color c1;
-	t_color c2;
+	double		index;
+	double		adjust;
+	int			c;
 
-	c1.value = 0x00000000;
-	c2.value = 0xFFFFFFFF;
-	return (clerp(c1, c2, iter / max));
+	if (p->cycle)
+		index = fmod(i, p->cycle - 1) / (p->cycle - 1);
+	else
+		index = i / max;
+	c = p->count - 1;
+	adjust = fmod(index, 1.0f / c) * c;
+	return (clerp((t_color)(p->colors[(int)(index * c) + 1]),
+		(t_color)(p->colors[(int)(index * c)]),
+		(int)(adjust + 1) - adjust));
 }
-t_color		smooth_color(t_pixel p, int max)
+t_color		smooth_color(t_pixel p, int max, t_palette *pal)
 {
 	static double log2 = log(2);
 	double i;
@@ -47,13 +54,13 @@ t_color		smooth_color(t_pixel p, int max)
 	i = p.i + 1 - nu;
 	if (i < 0)
 		i = 0;
-	return (linear_color(i, max));
+	return (linear_color(i, max, pal));
 }
 int			get_color(t_pixel p, t_mlx *mlx)
 {
 	if (p.i >= mlx->viewport.max)
 		return (0x000000);
 	if (mlx->smooth)
-		return (smooth_color(p, mlx->viewport.max).value);
-	return (linear_color((double)p.i, mlx->viewport.max).value);
+		return (smooth_color(p, mlx->viewport.max, mlx->palette).value);
+	return (linear_color((double)p.i, mlx->viewport.max, mlx->palette).value);
 }

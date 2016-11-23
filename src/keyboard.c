@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 05:33:43 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 14:53:47 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/22 17:32:11 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,22 @@
 int		hook_keydown(int key, t_mlx *mlx)
 {
 	printf("key %d\n", key);
+	if (key >= K_DIGIT_1 && key <= K_DIGIT_1 + 8)
+	{
+		mlx->palette = &get_palettes()[key - K_DIGIT_1];
+		draw(mlx);
+		return (0);
+	}
+	if (key == K_NUM_ENTER)
+	{
+		mlx->smooth = 1 - mlx->smooth;
+		draw(mlx);
+		return (0);
+	}
 	if (key == K_ESC)
 		exit(EXIT_SUCCESS);
 	if (key == K_NUM_0)
 		reset_viewport(mlx);
-	if (key == K_NUM_ENTER)
-		mlx->smooth = 1 - mlx->smooth;
 	if (key == K_NUM_MULT)
 		mlx->viewport.max *= 2;
 	if (key == K_NUM_DIV)
@@ -44,6 +54,8 @@ int		hook_keydown(int key, t_mlx *mlx)
 		mlx->viewport.offx -= w * 0.05f;
 	if (key == K_RIGHT)
 		mlx->viewport.offx += w * 0.05f;
+	if (key == K_L)
+		mlx->mouselock = 1 - mlx->mouselock;
 	render(mlx);
 	return (0);
 }

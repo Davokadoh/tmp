@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:37:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/20 23:57:16 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/22 21:51:06 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 int		hook_mousedown(int button, int x, int y, t_mlx *mlx)
 {
-	printf("%d --\n", button);
 	if (button == 4)
 	{
-		//wheel down
 		zoom(x, y, &mlx->viewport, 1 / ZOOM);
 		render(mlx);
 	}
@@ -27,7 +25,6 @@ int		hook_mousedown(int button, int x, int y, t_mlx *mlx)
 		zoom(x, y, &mlx->viewport, ZOOM);
 		render(mlx);
 	}
-	(void)x;
 	if (y < 0)
 		return (0);
 	mlx->mouse.isdown |= 1 << button;
@@ -67,7 +64,7 @@ int		hook_mousemove(int x, int y, t_mlx *mlx)
 	{
 		//right
 	}
-	if (mlx->mouse.isdown)
+	if (mlx->mouse.isdown || (mlx->fractal->mouse && !mlx->mouselock))
 		render(mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:33:04 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/21 07:58:17 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/22 17:34:22 by lemon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 
 t_fractal	*get_fractals()
 {
-	static t_fractal array[2] = {
-		{"mandelbrot", mandelbrot_viewport, mandelbrot_pixel},
-		{NULL, NULL, NULL}
+	static t_fractal array[8] = {
+		{"mandelbrot", mandelbrot_viewport, mandelbrot_pixel, 0},
+		{"julia", julia_viewport, julia_pixel, 1},
+		{"burningship", burningship_viewport, burningship_pixel, 0},
+/*		{"lemon", lemon_viewport, lemon_pixel},
+		{"insideout", insideout_viewport, insideout_pixel},
+		{"dragon", dragon_viewport, dragon_pixel},
+		{"cactus", cactus_viewport, cactus_pixel},*/
+		{NULL, NULL, NULL, 0}
 	};
 
 	return (array);
