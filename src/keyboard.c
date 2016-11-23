@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 05:33:43 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/23 03:04:58 by pbondoer         ###   ########.fr       */
+/*   Updated: 2016/11/23 03:06:38 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "keys.h"
 #include <stdlib.h>
 
-void	draw_hooks(int key, t_mlx *mlx)
+int		draw_hooks(int key, t_mlx *mlx)
 {
 	int		doot;
 
@@ -65,7 +65,7 @@ int		hook_keydown(int key, t_mlx *mlx)
 	if (key == K_NUM_MINUS)
 		zoom(WIN_WIDTH / 2, WIN_HEIGHT / 2, &mlx->viewport, ZOOM);
 	move(key, mlx);
-	if (!drawhooks(key, mlx))
+	if (!draw_hooks(key, mlx))
 		render(mlx);
 	return (0);
 }
