@@ -6,14 +6,16 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:35:18 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/23 00:55:10 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:41:16 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
+# define FRACTOL_H
+
 # include <stdint.h>
 # include <pthread.h>
-# define FRACTOL_H
+
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define ZOOM 1.1f
@@ -26,11 +28,13 @@ typedef struct		s_rgba
 	uint8_t		r;
 	uint8_t		a;
 }					t_rgba;
+
 typedef union		u_color
 {
 	int			value;
 	t_rgba		rgba;
 }					t_color;
+
 typedef struct		s_mouse
 {
 	char		isdown;
@@ -39,6 +43,7 @@ typedef struct		s_mouse
 	int			lastx;
 	int			lasty;
 }					t_mouse;
+
 typedef struct		s_image
 {
 	void		*image;
@@ -47,6 +52,13 @@ typedef struct		s_image
 	int			stride;
 	int			endian;
 }					t_image;
+
+typedef struct		s_complex
+{
+	double		r;
+	double		i;
+}					t_complex;
+
 typedef struct		s_viewport
 {
 	double		xmin;
@@ -57,42 +69,46 @@ typedef struct		s_viewport
 	double		offx;
 	double		offy;
 	long		max;
+	t_complex	mouse;
 }					t_viewport;
-typedef struct		s_complex
-{
-	double		r;
-	double		i;
-}					t_complex;
+
 typedef struct		s_pixel
 {
 	t_complex	c;
 	long		i;
 }					t_pixel;
+
 typedef struct		s_palette
 {
 	uint8_t		count;
 	int			cycle;
 	int			colors[16];
 }					t_palette;
-typedef struct		s_mlx		t_mlx;
+typedef struct s_mlx	t_mlx;
+
+typedef void		(*t_f_fn_v)(t_viewport *v);
+typedef t_pixel		(*t_f_fn_p)(int x, int y, t_viewport *v, t_mlx *mlx);
 typedef struct		s_fractal
 {
 	char		*name;
-	void		(*viewport)(t_viewport *);
-	t_pixel		(*pixel)(int, int, t_viewport *, t_mlx *);
+	t_f_fn_v	viewport;
+	t_f_fn_p	pixel;
 	int			mouse;
 }					t_fractal;
+
 typedef struct		s_thread
 {
 	int				id;
 	t_mlx			*mlx;
 }					t_thread;
+
 typedef struct		s_render
 {
 	pthread_t		threads[THREADS];
 	t_thread		args[THREADS];
 }					t_render;
-typedef struct		s_mlx
+
+struct				s_mlx
 {
 	void		*mlx;
 	void		*window;
@@ -105,7 +121,7 @@ typedef struct		s_mlx
 	t_render	render;
 	int			smooth;
 	int			mouselock;
-}					t_mlx;
+};
 
 t_mlx				*mlxdel(t_mlx *mlx);
 t_mlx				*init(t_fractal *f);
@@ -133,6 +149,5 @@ t_pixel				burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
 void				burningship_viewport(t_viewport *v);
 t_pixel				julia_pixel(int x, int y, t_viewport *v, t_mlx *mlx);
 void				julia_viewport(t_viewport *v);
-void				broadcast(pthread_mutex_t *lock, pthread_cond_t *cond);
-void				wait(pthread_mutex_t *lock, pthread_cond_t *cond);
+
 #endif

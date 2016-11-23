@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 14:43:24 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/22 00:41:07 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:42:55 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_color		clerp(t_color c1, t_color c2, double p)
 	c.rgba.a = (char)0x00;
 	return (c);
 }
+
 t_color		linear_color(double i, int max, t_palette *p)
 {
 	double		index;
@@ -42,20 +43,21 @@ t_color		linear_color(double i, int max, t_palette *p)
 		(t_color)(p->colors[(int)(index * c)]),
 		(int)(adjust + 1) - adjust));
 }
+
 t_color		smooth_color(t_pixel p, int max, t_palette *pal)
 {
-	static double log2 = log(2);
 	double i;
 	double zn;
 	double nu;
 
 	zn = log(p.c.r * p.c.r + p.c.i * p.c.i) / 2.0f;
-	nu = log(zn / log2) / log2;
+	nu = log(zn / log(2)) / log(2);
 	i = p.i + 1 - nu;
 	if (i < 0)
 		i = 0;
 	return (linear_color(i, max, pal));
 }
+
 int			get_color(t_pixel p, t_mlx *mlx)
 {
 	if (p.i >= mlx->viewport.max)

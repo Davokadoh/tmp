@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:44:47 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/23 01:08:18 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:44:00 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		*render_thread(void *m)
 	}
 	return (NULL);
 }
+
 void		render(t_mlx *mlx)
 {
 	int			i;
@@ -58,6 +59,7 @@ void		render(t_mlx *mlx)
 	}
 	draw(mlx);
 }
+
 void		draw(t_mlx *mlx)
 {
 	int x;

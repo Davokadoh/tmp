@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:28:17 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/22 22:30:39 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:44:16 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		die(char *reason)
 int		main(int argc, char **argv)
 {
 	t_mlx		*mlx;
-	t_fractal *f;
+	t_fractal	*f;
 
 	if (argc < 2)
 		return (die("error: not enough arguments"));
@@ -40,10 +40,7 @@ int		main(int argc, char **argv)
 	if ((mlx = init(f)) == NULL)
 		return (die("error: mlx couldn't initialize properly"));
 	reset_viewport(mlx);
-	mlx->mouselock = 1;
-	printf("pre render\n");
 	render(mlx);
-	printf("render\n");
 	mlx_key_hook(mlx->window, hook_keydown, mlx);
 	mlx_expose_hook(mlx->window, hook_expose, mlx);
 	mlx_hook(mlx->window, 4, 1L << 2, hook_mousedown, mlx);

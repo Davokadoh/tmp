@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 08:37:53 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/22 21:51:06 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 03:00:09 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,23 @@ int		hook_mouseup(int button, int x, int y, t_mlx *mlx)
 
 int		hook_mousemove(int x, int y, t_mlx *mlx)
 {
+	double w;
+	double h;
+
 	mlx->mouse.lastx = mlx->mouse.x;
 	mlx->mouse.lasty = mlx->mouse.y;
 	mlx->mouse.x = x;
 	mlx->mouse.y = y;
-	if (mlx->mouse.isdown & (1 << 1) && mlx->mouse.isdown & (1 << 2))
+	if (!mlx->mouselock)
+		mlx->viewport.mouse = screen_to_complex(x, y, &mlx->viewport);
+	if (mlx->mouse.isdown & (1 << 1))
 	{
-		// both buttons
-	}
-	else if (mlx->mouse.isdown & (1 << 1))
-	{
-		double w = (mlx->viewport.xmax - mlx->viewport.xmin) * mlx->viewport.zoom;
-		double h = (mlx->viewport.ymax - mlx->viewport.ymin) * mlx->viewport.zoom;
-
-		double wd = (double)(mlx->mouse.lastx - mlx->mouse.x) / WIN_WIDTH * w;
-		double hd = (double)(mlx->mouse.lasty - mlx->mouse.y) / WIN_HEIGHT * h;
-	
-		mlx->viewport.offx += wd;
-		mlx->viewport.offy += hd;
-	}
-	else if (mlx->mouse.isdown & (1 << 2))
-	{
-		//right
+		w = (mlx->viewport.xmax - mlx->viewport.xmin) * mlx->viewport.zoom;
+		h = (mlx->viewport.ymax - mlx->viewport.ymin) * mlx->viewport.zoom;
+		mlx->viewport.offx += (double)(mlx->mouse.lastx - mlx->mouse.x)
+			/ WIN_WIDTH * w;
+		mlx->viewport.offy += (double)(mlx->mouse.lasty - mlx->mouse.y)
+			/ WIN_HEIGHT * h;
 	}
 	if (mlx->mouse.isdown || (mlx->fractal->mouse && !mlx->mouselock))
 		render(mlx);

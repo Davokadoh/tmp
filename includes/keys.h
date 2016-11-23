@@ -6,7 +6,7 @@
 /*   By: lemon <pierre@bondoer.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 14:35:50 by lemon             #+#    #+#             */
-/*   Updated: 2016/11/22 17:33:12 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 01:46:59 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@
 #  define K_NUM_DIV		75
 #  define K_NUM_PLUS	69
 #  define K_NUM_MINUS	78
-#  define K_NUM_ENTER	0
-#  define K_NUM_0		0
+#  define K_NUM_ENTER	76
+#  define K_NUM_0		82
 #  define K_UP			126
 #  define K_DOWN		125
 #  define K_LEFT		123
 #  define K_RIGHT		124
-#  define K_L			0
+#  define K_DIGIT_1		18
+#  define K_L			37
 # endif
 #endif

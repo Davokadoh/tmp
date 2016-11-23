@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:50:02 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/22 17:13:59 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:43:43 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_pixel		mandelbrot_pixel(int x, int y, t_viewport *v, t_mlx *mlx)
 	return ((t_pixel){.c = z, .i = i});
 }
 
-void	mandelbrot_viewport(t_viewport *v)
+void		mandelbrot_viewport(t_viewport *v)
 {
 	v->xmin = -2.0f;
 	v->xmax = 1.0f;

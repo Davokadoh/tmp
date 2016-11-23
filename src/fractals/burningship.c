@@ -6,7 +6,7 @@
 /*   By: pbondoer <pbondoer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/12 10:50:02 by pbondoer          #+#    #+#             */
-/*   Updated: 2016/11/22 17:13:03 by lemon            ###   ########.fr       */
+/*   Updated: 2016/11/23 02:43:30 by pbondoer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_pixel		burningship_pixel(int x, int y, t_viewport *v, t_mlx *mlx)
 	return ((t_pixel){.c = z, .i = i});
 }
 
-void	burningship_viewport(t_viewport *v)
+void		burningship_viewport(t_viewport *v)
 {
 	v->xmin = -2.0f;
 	v->xmax = 1.0f;
