@@ -13,6 +13,7 @@
 #include "libft.h"
 #include "mlx.h"
 #include "fractol.h"
+#include <stdlib.h>
 
 t_mlx		*mlxdel(t_mlx *mlx)
 {
@@ -39,6 +40,7 @@ t_mlx		*init(t_fractal *f)
 		(mlx->data = ft_memalloc(sizeof(t_pixel) * WIN_WIDTH
 								* WIN_HEIGHT)) == NULL)
 		return (mlxdel(mlx));
+	free(title);
 	mlx->mouse.isdown = 0;
 	mlx->fractal = f;
 	mlx->mouselock = 1 - f->mouse;

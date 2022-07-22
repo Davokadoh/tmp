@@ -126,7 +126,6 @@ struct				s_mlx
 t_mlx				*mlxdel(t_mlx *mlx);
 t_mlx				*init(t_fractal *f);
 void				render(t_mlx *mlx);
-void				draw(t_mlx *mlx);
 int					hook_mousedown(int button, int x, int y, t_mlx *mlx);
 int					hook_mouseup(int button, int x, int y, t_mlx *mlx);
 int					hook_mousemove(int x, int y, t_mlx *mlx);

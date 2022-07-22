@@ -37,7 +37,7 @@ void		reset_viewport(t_mlx *mlx)
 	mlx->viewport.offy = 0;
 	mlx->fractal->viewport(&mlx->viewport);
 	viewport_fit(&mlx->viewport);
-	mlx->viewport.max = 32;
+	mlx->viewport.max = 50;
 	mlx->viewport.zoom = 1.0f;
 }
 

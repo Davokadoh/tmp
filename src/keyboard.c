@@ -26,7 +26,7 @@ int		draw_hooks(int key, t_mlx *mlx)
 	else
 		doot = 1;
 	if (!doot)
-		draw(mlx);
+		render(mlx);
 	return (doot);
 }
 
